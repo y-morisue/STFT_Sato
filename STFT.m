@@ -22,7 +22,13 @@ for i = 1 : numFlames % 1~numFlamsまで繰り返し
     S(:, i) = paddedSig(startIndex : endIndex); % i列目のすべての行に代入 
 end
 
-% 窓かけ処理
+% STFT
 winS = win .* S; % 窓かけ
-absWinS = abs(winS); % 各要素の絶対値
-pwS = absWinS .^ 2; % パワースペクトログラムの計算
+spect = fft(winS); % DFT
+absSpect = abs(spect); % 各要素の絶対値
+pwS = absSpect .^ 2; % パワースペクトログラムの計算
+logPwS = 10 * log10(pwS); % 対数
+
+% パワースペクトログラムのグラフ表示
+% fugure;
+% imagesc(logPwS, )
